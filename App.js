@@ -81,3 +81,56 @@ export default function App() {
     </View>
   );
 }
+import { useState } from "react";
+import { Text, View, Button } from "react-native";
+
+export default function App() {
+  const [pontuacaoNos, setPontuacaoNos] = useState(0);
+  const [pontuacaoEles, setPontuacaoEles] = useState(0);
+  const [vitoriaNos, setVitoriaNos] = useState(0);
+  const [vitoriaEles, setVitoriaEles] = useState(0);
+
+  const adicionarPontosNos = (p) => {
+    let total = pontuacaoNos + p;
+    if (total >= 12) {
+      setPontuacaoNos(0);
+      setPontuacaoEles(0);
+      setVitoriaNos(vitoriaNos + 1);
+    } else {
+      setPontuacaoNos(total);
+    }
+  };
+
+  const adicionarPontosEles = (p) => {
+    let total = pontuacaoEles + p;
+    if (total >= 12) {
+      setPontuacaoNos(0);
+      setPontuacaoEles(0);
+      setVitoriaEles(vitoriaEles + 1);
+    } else {
+      setPontuacaoEles(total);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+
+      <View style={{ marginBottom: 40, alignItems: "center" }}>
+        <Text style={{ fontSize: 24 }}>Nós</Text>
+        <Text style={{ fontSize: 50 }}>{pontuacaoNos}</Text>
+        <Text>Ganhou: {vitoriaNos}</Text>
+
+        <Button title="+1" onPress={() => adicionarPontosNos(1)} />
+      </View>
+
+      <View style={{ alignItems: "center" }}>
+        <Text style={{ fontSize: 24 }}>Eles</Text>
+        <Text style={{ fontSize: 50 }}>{pontuacaoEles}</Text>
+        <Text>Ganhou: {vitoriaEles}</Text>
+
+        <Button title="+1" onPress={() => adicionarPontosEles(1)} />
+      </View>
+
+    </View>
+  );
+}
